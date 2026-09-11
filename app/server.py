@@ -8,7 +8,7 @@ from app.student_service import (
 )
 
 from app.code_search import search_code
-from app.git_service import get_git_status
+from app.git_service import get_git_status,get_git_diff
 
 mcp = MCPServer(
     name="Practice MCP Server",
@@ -142,6 +142,10 @@ def get_git_status_tool() -> str:
     """Return the current git repository status"""
     return get_git_status()
 
+@mcp.tool()
+def get_git_diff_tool() -> str:
+    "REturn the current git unstaged changes"
+    return get_git_diff()
 
 if __name__ == "__main__":
     mcp.run()
