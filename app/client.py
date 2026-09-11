@@ -191,5 +191,15 @@ async def main() -> None:
             {},
         )
         print(result.content[0].text)
+
+        print("\nReading app/server.py....")
+        result = await client.call_tool(
+            "read_file_tool",
+            {
+                "file_path":"app/server.py"
+            }
+        )
+        print(result.content[0].text)
+
 if __name__ == "__main__":
     asyncio.run(main())
