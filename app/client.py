@@ -184,5 +184,12 @@ async def main() -> None:
             {},
         )
         print(result.content[0].text)    
+
+        print("\n Git Diff....")
+        result = await client.call_tool(
+            "get_git_diff_tool",
+            {},
+        )
+        print(result.content[0].text)
 if __name__ == "__main__":
     asyncio.run(main())
