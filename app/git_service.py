@@ -3,11 +3,11 @@ import subprocess
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-def get_git_status() -> str:
-    """Returns the current Git repository status."""
+def run_git_command(*args:str) -> str:
+    """Run a git command inside the project repository ."""
     try:
         result=subprocess.run(
-            ["git","status","--short","--branch"],
+            ["git",*args],
             cwd=PROJECT_ROOT,
             capture_output=True,
             text=True,
@@ -15,7 +15,7 @@ def get_git_status() -> str:
             check=False
         )
     except FileNotFoundError:
-        return "Git executable was not found on this system."
+        return "Git executable was not found."
     except subprocess.TimeoutExpired:
         return "Git status Timed out"
     except OSError as exc:
@@ -27,8 +27,25 @@ def get_git_status() -> str:
 
         return f"Git command failed with exit code {result.returncode}"
 
-    output=result.stdout.strip()
+    return result.stdout.strip()
+
+def get_git_status() -> str:
+    """Returns the current Git repository status."""
+    output=run_git_command(
+        "status",
+        "--short",
+        "--branch"
+    )
     if not output:
         return "Working tree is clean"
     return output
 
+def get_git_diff() -> str:
+    """Returns unstaged changes in the Git Repository."""
+    output=run_git_command(
+        "diff",
+        "--"
+    )
+    if not output:
+        return "No unstaged changes found"
+    return output
