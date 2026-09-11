@@ -209,5 +209,14 @@ async def main() -> None:
         )
 
         print(result.content[0].text)
+
+        print("\nAnalyzing app/server.py....")
+        result = await client.call_tool(
+            "analyse_project_tool",
+            {
+                "file_path": "app/server.py"
+            }
+        )
+        print(result.content[0].text)
 if __name__ == "__main__":
     asyncio.run(main())
