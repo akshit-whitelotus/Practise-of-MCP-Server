@@ -11,6 +11,7 @@ from app.code_search import search_code
 from app.git_service import get_git_status,get_git_diff
 from app.file_service import read_project_file
 from app.project_service import get_project_health
+from app.project_analyzer import analyze_project_file
 
 mcp = MCPServer(
     name="Practice MCP Server",
@@ -165,6 +166,15 @@ def read_file_tool(file_path:str) -> str:
 def project_health_tool() -> str:
     """Inspect the project and return a health report."""
     return get_project_health()
+
+
+# ============================================================
+# Project Analyzer Tool
+# ============================================================
+@mcp.tool()
+def analyse_project_tool(file_path:str) -> str:
+    "Analyze a python project file for structure and mcp components"
+    return analyze_project_file(file_path)
 
 
 if __name__ == "__main__":
