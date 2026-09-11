@@ -9,6 +9,7 @@ from app.student_service import (
 
 from app.code_search import search_code
 from app.git_service import get_git_status,get_git_diff
+from app.file_service import read_project_file
 
 mcp = MCPServer(
     name="Practice MCP Server",
@@ -146,6 +147,17 @@ def get_git_status_tool() -> str:
 def get_git_diff_tool() -> str:
     "REturn the current git unstaged changes"
     return get_git_diff()
+
+# ============================================================
+# Read project file
+# ============================================================
+@mcp.tool()
+def read_file_tool(file_path:str) -> str:
+    """Read a text file from a project"""
+    return read_project_file(file_path)
+
+
+
 
 if __name__ == "__main__":
     mcp.run()
