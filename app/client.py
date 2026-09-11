@@ -178,5 +178,11 @@ async def main() -> None:
         print("Search Results:")
         print(result.content[0].text)
 
+        print("\n Git repository status....")
+        result = await client.call_tool(
+            "get_git_status_tool",
+            {},
+        )
+        print(result.content[0].text)    
 if __name__ == "__main__":
     asyncio.run(main())

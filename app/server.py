@@ -8,7 +8,7 @@ from app.student_service import (
 )
 
 from app.code_search import search_code
-
+from app.git_service import get_git_status
 
 mcp = MCPServer(
     name="Practice MCP Server",
@@ -132,6 +132,15 @@ Please provide:
 3. Areas of improvement
 4. Recommended next steps
 """
+
+# ============================================================
+# Git status check
+# ============================================================
+
+@mcp.tool()
+def get_git_status_tool() -> str:
+    """Return the current git repository status"""
+    return get_git_status()
 
 
 if __name__ == "__main__":
