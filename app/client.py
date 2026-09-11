@@ -201,5 +201,13 @@ async def main() -> None:
         )
         print(result.content[0].text)
 
+        print("\nProject Health....")
+
+        result = await client.call_tool(
+            "project_health_tool",
+            {},
+        )
+
+        print(result.content[0].text)
 if __name__ == "__main__":
     asyncio.run(main())
