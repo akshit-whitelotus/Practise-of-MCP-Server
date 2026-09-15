@@ -12,6 +12,7 @@ from app.git_service import get_git_status,get_git_diff
 from app.file_service import read_project_file
 from app.project_service import get_project_health
 from app.project_analyzer import analyze_project_file
+from app.test_runner import run_tests
 
 mcp = MCPServer(
     name="Practice MCP Server",
@@ -176,6 +177,13 @@ def analyse_project_tool(file_path:str) -> str:
     "Analyze a python project file for structure and mcp components"
     return analyze_project_file(file_path)
 
+# ============================================================
+# Test Runner Tool
+# ============================================================
+@mcp.tool()
+def run_tests_tool() -> str:
+    """Run the project's pytest test suite and return the test report."""
+    return run_tests()
 
 if __name__ == "__main__":
     mcp.run()
