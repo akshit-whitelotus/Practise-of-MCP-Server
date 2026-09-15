@@ -13,7 +13,7 @@ from app.file_service import read_project_file
 from app.project_service import get_project_health
 from app.project_analyzer import analyze_project_file
 from app.test_runner import run_tests
-
+from app.test_analyzer import analyze_test_failures
 mcp = MCPServer(
     name="Practice MCP Server",
     version="1.0.0",
@@ -184,6 +184,13 @@ def analyse_project_tool(file_path:str) -> str:
 def run_tests_tool() -> str:
     """Run the project's pytest test suite and return the test report."""
     return run_tests()
+# ============================================================
+# Test Failure Analyzer Tool
+# ============================================================
 
+@mcp.tool()
+def test_failure_analyzer_tool() -> str:
+    """Run pytest and analyze test failures."""
+    return analyze_test_failures()
 if __name__ == "__main__":
     mcp.run()
