@@ -228,5 +228,14 @@ async def main() -> None:
 
         print("Test Report:")
         print(result.content[0].text)
+        print("\nAnalyzing test failures....")
+
+        result = await client.call_tool(
+                "test_failure_analyzer_tool",
+                {},
+            )
+
+        print("Failure Analysis:")
+        print(result.content[0].text)
 if __name__ == "__main__":
     asyncio.run(main())
